@@ -10,7 +10,7 @@ app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Headers", 'Authorization, Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
 	next();
   });
-  
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
@@ -54,6 +54,6 @@ app.get('/', function(req, res) {
 });
 
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || '3000', function() {
 	console.log('App is listening on port 3000!');
 });
