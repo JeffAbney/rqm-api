@@ -31,7 +31,6 @@ app.get('/', function (req, res) {
 		console.log('The solution is: ', results[0].solution);
 	});
 
-	connection.end();
 	// //var q = 'INSERT INTO quotes (author, content) VALUES ?;';
 	// var q = 'SELECT * from quotes;'
 	// connection.connect();
