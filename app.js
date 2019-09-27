@@ -22,17 +22,26 @@ var connection = mysql.createConnection({
 	password: 'yYG9bt9yJU',
 });
 
+connection.connect();
 
-app.get('/', function(req, res) {
-	//var q = 'INSERT INTO quotes (author, content) VALUES ?;';
-	var q = 'SELECT * from quotes;'
-	connection.connect();
-	connection.query(q, function(error, results) {
-		if (error) throw error;
-		res.send(results);
-	});
-	connection.end();
+connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
 });
+
+connection.end();
+
+
+// app.get('/', function(req, res) {
+// 	//var q = 'INSERT INTO quotes (author, content) VALUES ?;';
+// 	var q = 'SELECT * from quotes;'
+// 	connection.connect();
+// 	connection.query(q, function(error, results) {
+// 		if (error) throw error;
+// 		res.send(results);
+// 	});
+// 	connection.end();
+// });
 
 
 app.listen(process.env.PORT || '3000', function() {
