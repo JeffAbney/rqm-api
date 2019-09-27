@@ -3,13 +3,13 @@ var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
 const app = express();
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.header("Access-Control-Allow-Origin", '*');
 	res.header("Access-Control-Allow-Credentials", true);
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 	res.header("Access-Control-Allow-Headers", 'Authorization, Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
 	next();
-  });
+});
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,28 +22,27 @@ var connection = mysql.createConnection({
 	password: 'yYG9bt9yJU',
 });
 
-connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The solution is: ', results[0].solution);
+app.get('/', function (req, res) {
+	connection.connect();
+
+	connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+		if (error) throw error;
+		console.log('The solution is: ', results[0].solution);
+	});
+
+	connection.end();
+	// //var q = 'INSERT INTO quotes (author, content) VALUES ?;';
+	// var q = 'SELECT * from quotes;'
+	// connection.connect();
+	// connection.query(q, function(error, results) {
+	// 	if (error) throw error;
+	// 	res.send(results);
+	// });
+	// connection.end();
 });
 
-connection.end();
 
-
-// app.get('/', function(req, res) {
-// 	//var q = 'INSERT INTO quotes (author, content) VALUES ?;';
-// 	var q = 'SELECT * from quotes;'
-// 	connection.connect();
-// 	connection.query(q, function(error, results) {
-// 		if (error) throw error;
-// 		res.send(results);
-// 	});
-// 	connection.end();
-// });
-
-
-app.listen(process.env.PORT || '3000', function() {
+app.listen(process.env.PORT || '3000', function () {
 	console.log('App is listening on port 3000!');
 });
