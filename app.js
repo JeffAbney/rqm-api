@@ -24,21 +24,13 @@ var connection = mysql.createConnection({
 
 
 app.get('/', function (req, res) {
-	connection.connect();
 
-	connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+	//var q = 'INSERT INTO quotes (author, content) VALUES ?;';
+	var q = 'SELECT * from quotes;'
+	connection.query(q, function(error, results) {
 		if (error) throw error;
-		console.log('The solution is: ', results[0].solution);
+		res.send(results);
 	});
-
-	// //var q = 'INSERT INTO quotes (author, content) VALUES ?;';
-	// var q = 'SELECT * from quotes;'
-	// connection.connect();
-	// connection.query(q, function(error, results) {
-	// 	if (error) throw error;
-	// 	res.send(results);
-	// });
-	// connection.end();
 });
 
 
