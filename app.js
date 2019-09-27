@@ -48,9 +48,10 @@ app.get('/', function(req, res) {
 	connection.query(q, [data], function(error, results) {
 		if (error) throw error;
 		res.send(results);
+		connection.end();
 	});
 
-	connection.end();
+	
 });
 
 
