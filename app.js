@@ -26,6 +26,7 @@ var connection = mysql.createConnection({
 app.get('/', function(req, res) {
 	//var q = 'INSERT INTO quotes (author, content) VALUES ?;';
 	var q = 'SELECT * from quotes;'
+	connection.connect();
 	connection.query(q, function(error, results) {
 		if (error) throw error;
 		res.send(results);
