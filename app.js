@@ -22,16 +22,30 @@ var connection = mysql.createConnection({
 	password: 'yYG9bt9yJU',
 });
 
-
+//Get all quotes from DB in random order
 app.get('/', function (req, res) {
-
-	//var q = 'INSERT INTO quotes (author, content) VALUES ?;';
-	var q = 'SELECT * from quotes;'
-	connection.query(q, function(error, results) {
+	var q = 'SELECT * FROM quotes ORDER BY RAND();'
+	connection.query(q, function (error, results) {
 		if (error) throw error;
 		res.send(results);
 	});
 });
+// Post new share 
+app.post('/addShare', function (req, res) {
+	var q = `INSERT INTO shares (platform, quote_id), VALUES (${platform}, ${quote_id});`
+	connection.query(q, function (error, results) {
+		if (error) throw error;
+		res.send(results);
+	});
+})
+
+app.get('/shares', function (req, res) {
+	var q = `SELECT quote_id, platform, count(*) FROM shares GROUP BY quote_id,shares.platform`
+	connection.query(q, function (error, results) {
+		if (error) throw error;
+		res.send(results);
+	})
+})
 
 
 app.listen(process.env.PORT || '3000', function () {
