@@ -40,7 +40,7 @@ app.post('/addShare', function (req, res) {
 })
 
 app.get('/shares', function (req, res) {
-	var q = `SELECT quote_id, platform, count(*) FROM shares GROUP BY quote_id,shares.platform`
+	var q = `SELECT quote_id, platform, count(*) as count FROM shares GROUP BY quote_id,shares.platform`
 	connection.query(q, function (error, results) {
 		if (error) throw error;
 		res.send(results);
