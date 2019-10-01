@@ -35,6 +35,7 @@ app.post('/addShare', function (req, res) {
 	var q = `INSERT INTO shares (platform, quote_id) VALUES (${req.body.platform}, ${req.body.quote_id});`
 	connection.query(q, function (error, results) {
 		if (error) throw error;
+		console.log('add share results', results)
 		res.send(results);
 	});
 })
