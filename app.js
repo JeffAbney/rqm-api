@@ -32,7 +32,9 @@ app.get('/', function (req, res) {
 });
 // Post new share 
 app.get('/addShare', function (req, res) {
-	var q = `INSERT INTO shares (platform, quote_id) VALUES (${req.body.platform}, ${req.body.quote_id});`
+	const platform = req.body.platform;
+	const id = req.body.quote_id;
+	var q = `INSERT INTO shares (platform, quote_id) VALUES ("${platform}", ${id});`
 	connection.query(q, function (error, results) {
 		if (error) throw error;
 		console.log('add share results', results)
