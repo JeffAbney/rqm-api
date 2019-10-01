@@ -32,7 +32,7 @@ app.get('/', function (req, res) {
 });
 // Post new share 
 app.get('/addShare/:id', function (req, res) {
-	const id = req.query.id;
+	const id = req.params.id;
 	console.log('heres id ', id)
 	var q = `INSERT INTO shares (platform, quote_id) VALUES ("twitter", ${id});`
 	connection.query(q, function (error, results) {
