@@ -31,11 +31,10 @@ app.get('/', function (req, res) {
 	});
 });
 // Post new share 
-app.get('/addShare', function (req, res) {
-	const platform = req.body.platform;
-	const id = req.body.quote_id;
-	console.log(req.body);
-	var q = `INSERT INTO shares (platform, quote_id) VALUES ("${platform}", 7);`
+app.get('/addShare/:id', function (req, res) {
+	const id = req.query.id;
+	console.log('heres id ', id)
+	var q = `INSERT INTO shares (platform, quote_id) VALUES ("twitter", ${id});`
 	connection.query(q, function (error, results) {
 		if (error) throw error;
 		console.log('add share results', results)
